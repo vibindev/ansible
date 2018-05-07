@@ -1,0 +1,19 @@
+---
+ - name: Install apt-transport-https
+   apt: name=apt-transport-https state=present
+
+ - name: Add Jenkins Apt repository key
+   apt_key:
+     url: "{{ jenkins_repo_key_url  }}"
+     state: present
+
+ - name: Add Jenkins apt repository.
+   apt_repository:
+    repo: "{{ jenkins_repo_url }}"
+    state: present
+    update_cache: yes
+
+ - name: Ensure Jenkins is installed.
+   apt:
+    name: jenkins
+    state: present
